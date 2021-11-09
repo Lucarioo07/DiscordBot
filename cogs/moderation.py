@@ -13,13 +13,13 @@ class Moderation(commands.Cog):
     @commands.is_owner()
     async def warn(self, ctx, warned: discord.User, *, reason):
         try:
-            db["warns"][str(ctx.guild.id)][str(warned)][str(ctx.message.id)] = {"staff": str(ctx.author), "reason": reason}
+            db["warns"][ctx.guild.id][warned.id][ctx.message.id] = {"staff": ctx.author.id, "reason": reason}
 
         except:
           try:
-            db["warns"][str(ctx.guild.id)][str(warned)] = {str(ctx.message.id): {"staff": str(ctx.author), "reason": reason}}
+            db["warns"][ctx.guild.id][warned.id] = {ctx.message.id: {"staff": ctx.author.id, "reason": reason}}
           except:
-            db["warns"][str(ctx.guild.id)] = {str(warned): {str(ctx.message.id): {"staff": str(ctx.author), "reason": reason}}}
+            db["warns"][ctx.guild.id] = {warned.id: {ctx.message.id: {"staff": ctx.author.id, "reason": reason}}}
 
         embed = discord.Embed(
             description=f"***{str(warned)}** was warned by **{str(ctx.author)}** for* **`{reason}`**",
