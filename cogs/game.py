@@ -11,7 +11,7 @@ class Game(commands.Cog):
     
   DiscordComponents(client)
 
-  @commands.command(aliases=["dbzinfo"])
+  @commands.command(aliases=["dbzinfo", "info"])
   async def dbz_info(self, ctx):
 
     embed = discord.Embed(
@@ -21,7 +21,10 @@ class Game(commands.Cog):
         "The syntax for the command is `>fight <mention> [reloads] [saiyan]`. Leaving saiyan or reloads blank will default it to 0. "
         "The game itself is simple, each use of `Reload` gives you a reload, the energy used to pull off the attacks. "
         "The more reloads an attack needs, more powerful the move is. "
-        "Each of the defensive moves have pros and cons, which will be listed below. "
+        "Using a move that costs more reloads than you have results in `Overloading`, which kills you regardless of your super-saiyan level. "
+        "The price of each attack is put next to the button. "
+        "Green buttons are power up moves, red buttons are attacks, and blue buttons are defensive. "
+        "Each of the defensive moves have pros and cons, which will be listed below, read <:gru_gun:786829006476410910>. "
         "Hope you enjoy!",
         color=cyan
     )
@@ -114,39 +117,39 @@ class Game(commands.Cog):
                             components=[
                                 [
                                     Button(style=ButtonStyle.green,
-                                            label="Reload 👏",
+                                            label="Reload",
                                             custom_id="Reload")
                                             ,
                                     Button(style=ButtonStyle.green,
-                                            label="Super Saiyan 🤯",
+                                            label="Super Saiyan (6)",
                                             custom_id="Super Saiyan")
                                 ],
                                 [
                                     Button(style=ButtonStyle.red,
-                                            label="Kamehameha 🎇",
+                                            label="Kamehameha (1)",
                                             custom_id="Kamehameha"),
                                     Button(style=ButtonStyle.red,
-                                            label="Double Kamehameha 🎆",
+                                            label="Double Kamehameha (2)",
                                             custom_id="Double Kamehameha"),
                                     Button(style=ButtonStyle.red,
-                                            label="Slash 🔪",
+                                            label="Slash (4)",
                                             custom_id="Slash"),
                                     Button(style=ButtonStyle.red,
-                                            label="Spirit Bomb 💣",
+                                            label="Spirit Bomb (6)",
                                             custom_id="Spirit Bomb"),
                                     Button(style=ButtonStyle.red,
-                                            label="Dragon Fist 🤜",
+                                            label="Dragon Fist (8)",
                                             custom_id="Dragon Fist"),
                                 ],
                                 [
                                     Button(style=ButtonStyle.blue,
-                                            label="Reflect 🛡️",
+                                            label="Reflect",
                                             custom_id="Reflect"),
                                     Button(style=ButtonStyle.blue,
-                                            label="Block 🛡️",
+                                            label="Block",
                                             custom_id="Block"),
                                     Button(style=ButtonStyle.blue,
-                                            label="Teleport 🛡️",
+                                            label="Teleport",
                                             custom_id="Teleport")
                                 ],
                             ])
