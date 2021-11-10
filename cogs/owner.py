@@ -14,12 +14,20 @@ import textwrap
 from traceback import format_exception
 
 
-class Owner_Only(commands.Cog):
+class Owner(commands.Cog):
 
     def __init__(self, client):
         self.client = client
 
     # Events
+
+    @commands.Cog.listener()
+    async def on_message_delete(self, ctx):
+      
+      db["snipes"][ctx.channel.id] = {
+        "author": ctx.author.id,
+        "content": ctx.content
+      }
 
     # Commands
 
@@ -150,18 +158,7 @@ class Owner_Only(commands.Cog):
             )
 
             await pager.start(ctx)
-      
-
-    @commands.command()
-    @commands.is_owner()
-    async def db_init(self, ctx, keyname):
-
-      db[keyname] = {}
-
-      await ctx.send(embed=discord.Embed(description=f"`DB key '{keyname}' has been set to an empty dictionary`", color=cyan))
-
-
 
 
 def setup(client):
-    client.add_cog(Owner_Only(client))
+    client.add_cog(Owner(client))
