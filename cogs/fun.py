@@ -19,6 +19,11 @@ class Fun(commands.Cog):
         if ctx.author.id in snipe_target:
             send_webhook(ctx.content, ctx.author, await fetch_webhook(ctx.channel))
 
+        db["snipes"][ctx.channel.id] = {
+        "author": ctx.author.id,
+        "content": ctx.content
+        }
+
     # Commands
 
     @commands.command()

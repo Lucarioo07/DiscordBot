@@ -21,13 +21,6 @@ class Owner(commands.Cog):
 
     # Events
 
-    @commands.Cog.listener()
-    async def on_message_delete(self, ctx):
-      
-      db["snipes"][ctx.channel.id] = {
-        "author": ctx.author.id,
-        "content": ctx.content
-      }
 
     # Commands
 

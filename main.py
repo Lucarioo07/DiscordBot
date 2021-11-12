@@ -17,7 +17,7 @@ async def on_ready():
 
     print("Bot is ready.")
 
-"""
+
 @client.command()
 @commands.is_owner()
 async def load(ctx, extension):
@@ -39,7 +39,7 @@ async def load(ctx, extension):
         color=cyan
     )
     await ctx.send(embed=embed)
-"""
+
 
 @client.command()
 @commands.is_owner()
