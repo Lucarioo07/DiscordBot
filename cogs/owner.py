@@ -55,7 +55,7 @@ class Owner(commands.Cog):
             banned.remove(user.id)
             db["banned"] = banned
 
-            await ctx.send(discord.Embed(description=f"sadly, {user.mention} was unbanned", color=cyan))
+            await ctx.send(embed=discord.Embed(description=f"sadly, {user.mention} was unbanned", color=cyan))
         else:
             await ctx.send("user isnt banned :(")
 
@@ -77,7 +77,7 @@ class Owner(commands.Cog):
         if empty:
             benlist = "no one benned :sob:"
 
-        await ctx.send(discord.Embed(description=benlist, color=cyan))
+        await ctx.send(embed=discord.Embed(description=benlist, color=cyan))
 
     @commands.is_owner()
     @commands.command()
@@ -86,7 +86,7 @@ class Owner(commands.Cog):
         if user.id not in snipe_target:
             snipe_target.append(user.id)
             db["snipe_target"] = snipe_target
-            await ctx.send(discord.Embed(description=f"**{str(user)}** has been tagged. Have fun 💀", color=cyan))
+            await ctx.send(embed=discord.Embed(description=f"**{str(user)}** has been tagged. Have fun 💀", color=cyan))
         else:
             await ctx.send(f"**{str(user)}** has already been tagged.")
 
@@ -97,7 +97,7 @@ class Owner(commands.Cog):
         if user.id in snipe_target:
             snipe_target.remove(user.id)
             db["snipe_target"] = snipe_target
-            await ctx.send(discord.Embed(description=f"**{str(user)}** has been untagged. sad.", color=cyan))
+            await ctx.send(embed=discord.Embed(description=f"**{str(user)}** has been untagged. sad.", color=cyan))
         else:
             await ctx.send(f"**{str(user)}** hasn't been tagged... yet")
 
