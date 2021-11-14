@@ -38,6 +38,16 @@ class Fun(commands.Cog):
               send_webhook(content, user, await fetch_webhook(ctx.channel))
         else:
             send_webhook(content, ctx.author, await fetch_webhook(ctx.channel))
+    
+    @commands.command()
+    async def names(self, ctx):
+      if ctx.guild.id == 764060384897925120:
+        
+        chn = await client.fetch_channel(765197786680786964)
+        msg = await chn.fetch_message(896296462328135680)
+
+        await ctx.send(embed=discord.Embed(description=msg.content, color=cyan))
+      
 
 
 def setup(client):

@@ -27,6 +27,35 @@ class Moderation(commands.Cog):
         )
         await ctx.send(embed=embed)
     
+    @commands.command()
+    @commands.is_owner()
+    async def delwarn(self, ctx, user: discord.User, warn_id):
+      try:
+        if warn_id in db["warns"][str(ctx.guild.id)][str(user.id)].keys():
+          embed = discord.Embed(
+            description=f"The warn with ID `{warn_id}` has been deleted.",
+            color=cyan
+          )
+          del db["warns"][str(ctx.guild.id)][str(user.id)][warn_id]
+        else:
+          embed = discord.Embed(
+            description=f"A warn for this user with ID `{warn_id}` couldnt't be found.",
+            color=cyan
+          )
+      except:
+        embed = discord.Embed(
+            description=f"A warn for this user with ID `{warn_id}` couldnt't be found.",
+            color=cyan
+          )
+      await ctx.send(embed=embed)
+
+    @commands.command()
+    @commands.is_owner()
+    async def clearwarn(self, ctx, user: discord.User):
+      try:
+        del db["warns"][str(ctx.guild.id)][str(user.id)]
+      except:
+        pass
 
     @commands.command(aliases=["warnings", "oopsies"])
     async def warns(self, ctx, user: discord.User= None):
