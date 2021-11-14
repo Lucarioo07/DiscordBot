@@ -42,11 +42,11 @@ class Fun(commands.Cog):
     @commands.command()
     async def names(self, ctx):
       if ctx.guild.id == 764060384897925120:
-        
+
         chn = await client.fetch_channel(765197786680786964)
         msg = await chn.fetch_message(896296462328135680)
-
-        await ctx.send(embed=discord.Embed(description=msg.content, color=cyan))
+        desc = f'{msg.content}\n [Original](https://discord.com/channels/{ctx.guild.id}/{chn.id}/{msg.id} "Jump to original message")'
+        await ctx.send(embed=discord.Embed(description=desc, color=cyan))
       
 
 

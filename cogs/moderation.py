@@ -54,8 +54,9 @@ class Moderation(commands.Cog):
     async def clearwarn(self, ctx, user: discord.User):
       try:
         del db["warns"][str(ctx.guild.id)][str(user.id)]
+        await ctx.send(embed=discord.Embed(description=f"**`{user}`** has had their warns cleared.", color=cyan))
       except:
-        pass
+        await ctx.send(embed=discord.Embed(description=f"It appears **`{user}`** doesn't have any warns, we could fix that...", color=cyan))
 
     @commands.command(aliases=["warnings", "oopsies"])
     async def warns(self, ctx, user: discord.User= None):
