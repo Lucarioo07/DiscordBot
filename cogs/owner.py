@@ -41,7 +41,7 @@ class Owner(commands.Cog):
             banned.append(user.id)
             db["banned"] = banned
 
-            await ctx.send(embed=discord.Embed(description=f"*haha **`{user}`**, you are now botbanned*", color=cyan))
+            await ctx.send(embed=discord.Embed(description=f"haha **`{user}`**, you are now botbanned", color=cyan))
         else:
             await ctx.send("user already banned wheeeeeeee")
 
@@ -55,7 +55,7 @@ class Owner(commands.Cog):
             banned.remove(user.id)
             db["banned"] = banned
 
-            await ctx.send(embed=discord.Embed(description=f"sadly, {user.mention} was unbanned", color=cyan))
+            await ctx.send(embed=discord.Embed(description=f"sadly, **`{user}`** was unbanned", color=cyan))
         else:
             await ctx.send("user isnt banned :(")
 
@@ -86,9 +86,9 @@ class Owner(commands.Cog):
         if user.id not in snipe_target:
             snipe_target.append(user.id)
             db["snipe_target"] = snipe_target
-            await ctx.send(embed=discord.Embed(description=f"**{str(user)}** has been tagged. Have fun 💀", color=cyan))
+            await ctx.send(embed=discord.Embed(description=f"**`{user}`** has been tagged. Have fun 💀", color=cyan))
         else:
-            await ctx.send(f"**{str(user)}** has already been tagged.")
+            await ctx.send(f"**`{user}`** has already been tagged.")
 
     @commands.is_owner()
     @commands.command()
@@ -97,9 +97,9 @@ class Owner(commands.Cog):
         if user.id in snipe_target:
             snipe_target.remove(user.id)
             db["snipe_target"] = snipe_target
-            await ctx.send(embed=discord.Embed(description=f"**{str(user)}** has been untagged. sad.", color=cyan))
+            await ctx.send(embed=discord.Embed(description=f"**`{user}`** has been untagged. sad.", color=cyan))
         else:
-            await ctx.send(f"**{str(user)}** hasn't been tagged... yet")
+            await ctx.send(f"**`{user}`** hasn't been tagged... yet")
 
     @commands.command(name="eval", aliases=["exec"])
     @commands.is_owner()
