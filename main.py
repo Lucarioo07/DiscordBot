@@ -5,7 +5,6 @@ from random import choice
 from discord.ext import commands
 import os
 
-
 client.remove_command("help")
 
 
