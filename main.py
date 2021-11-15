@@ -10,6 +10,9 @@ client.remove_command("help")
 
 @client.event
 async def on_ready():
+
+    await client.change_presence(activity=discord.Activity(type=discord.ActivityType.listening, name="Among Us Drip Remix"), status=discord.Status.dnd)
+
     for filename in os.listdir('./cogs'):
         if filename.endswith(".py"):
             client.load_extension(f"cogs.{filename[:-3]}")
