@@ -63,31 +63,39 @@ class Game(commands.Cog):
           ]])
 
       while True:
+          try:
+            inter = await client.wait_for("button_click", timeout=60.0)
+          except:
+            for component in ch.components:
+              for button in component:
+                button.disabled = True
+            await ch.edit(components=ch.components)
+            await ctx.message.reply("The challenge timed out...")
+            return
+          else:
+            clicker_id = inter.user.id
+            response = inter.custom_id
+            battle = None
+            if clicker_id == opponent.id or clicker_id == 622090741862236200:
+                if response == 'y':
+                    await inter.send(content="You accepted the challenge request")
+                    await ctx.send("Let the battle begin!")
 
-          inter = await client.wait_for("button_click")
-          clicker_id = inter.user.id
-          response = inter.custom_id
-          battle = None
-          if clicker_id == opponent.id or clicker_id == 622090741862236200:
-              if response == 'y':
-                  await inter.send(content="You accepted the challenge request")
-                  await ctx.send("Let the battle begin!")
+                    embed = discord.Embed(title="Select Your Moves!",
+                                          color=cyan)
+                    message = await ctx.send(content=f"{ctx.author.mention} {opponent.mention}", embed=embed)
 
-                  embed = discord.Embed(title="Select Your Moves!",
-                                        color=cyan)
-                  message = await ctx.send(content=f"{ctx.author.mention} {opponent.mention}", embed=embed)
+                    battle = True
+                elif response == 'n':
+                    await inter.send(content="You declined the challenge request")
+                    await inter.send("Declined :crying_cat_face:")
+                    battle = False
 
-                  battle = True
-              elif response == 'n':
-                  await inter.send(content="You declined the challenge request")
-                  await inter.send("Declined :crying_cat_face:")
-                  battle = False
-
-              for component in ch.components:
-                for button in component:
-                  button.disabled = True
-              await ch.edit(components=ch.components)
-              break
+                for component in ch.components:
+                  for button in component:
+                    button.disabled = True
+                await ch.edit(components=ch.components)
+                break
 
       move = 0
 
@@ -164,41 +172,69 @@ class Game(commands.Cog):
 
           while True:
 
+              try:
+                inter = await client.wait_for("button_click", timeout= 15.0, check=lambda x: x.message.id == message.id)
+              except:
 
-              inter = await client.wait_for("button_click", check=lambda x: x.message.id == message.id)
+                for component in ch.components:
+                  for button in component:
+                    button.disabled = True
+                await ch.edit(components=ch.components)
 
-              clicker_id = inter.user.id
+                if (not sender_picked) and (not opponent_picked):
+                  embed = discord.Embed(
+                    title=f"__**Its a tie!**__",
+                    description=f"`Reason:` Both users timed out...",
+                    color=cyan
+                    )
+                elif sender_picked:
+                  embed = discord.Embed(
+                    title=f"Game Over, {ctx.author.name} wins!",
+                    description=f"`Reason:` Both {opponent.name} timed out...",
+                    color=cyan
+                  )
+                elif opponent_picked:
+                  embed = discord.Embed(
+                    title=f"Game Over, {opponent.name} wins!",
+                    description=f"`Reason:` {ctx.author.name} timed out...",
+                    color=cyan
+                  )
+                await ctx.send(f"{ctx.author.mention} {opponent.mention}", embed=embed)
+                return
 
-              if clicker_id == ctx.author.id:
-                  sender_move = inter.custom_id
+              else:
+                clicker_id = inter.user.id
 
-                  if not sender_picked:
+                if clicker_id == ctx.author.id:
+                    sender_move = inter.custom_id
 
-                    footer = footer + f"({ctx.author.name} is ready) "
-                    embed.set_footer(text=footer)
-                    await inter.send(content=f"You picked the move `{sender_move}`")
+                    if not sender_picked:
+
+                      footer = footer + f"({ctx.author.name} is ready) "
+                      embed.set_footer(text=footer)
+                      await inter.send(content=f"You picked the move `{sender_move}`")
+                      await message.edit(embed=embed)
+                      sender_picked = True
+                    else:
+                      await inter.send("You can't change your move after its picked 😔😔")
+                    
+                if clicker_id == opponent.id:
+                    opponent_move = inter.custom_id
+
+                    if not opponent_picked:
+
+                      footer = footer + f"({opponent.name} is ready) "
+                      embed.set_footer(text=footer)
+                      await inter.send(content=f"You picked the move `{opponent_move}`")
+                      await message.edit(embed=embed)
+                      opponent_picked = True
+                    else:
+                      await inter.send("You can't change your move after its picked 😔😔")
+                    
+                if sender_move and opponent_move is not None:
+                    embed.set_footer(text="")
                     await message.edit(embed=embed)
-                    sender_picked = True
-                  else:
-                    await inter.send("You can't change your move after its picked 😔😔")
-                  
-              if clicker_id == opponent.id:
-                  opponent_move = inter.custom_id
-
-                  if not opponent_picked:
-
-                    footer = footer + f"({opponent.name} is ready) "
-                    embed.set_footer(text=footer)
-                    await inter.send(content=f"You picked the move `{opponent_move}`")
-                    await message.edit(embed=embed)
-                    opponent_picked = True
-                  else:
-                    await inter.send("You can't change your move after its picked 😔😔")
-                  
-              if sender_move and opponent_move is not None:
-                  embed.set_footer(text="")
-                  await message.edit(embed=embed)
-                  break
+                    break
 
           # __Game Logic here__
 
@@ -328,6 +364,12 @@ class Game(commands.Cog):
 
               embed.set_footer(text="Note: The reason might not always be exactly accurate.")
               await ctx.send(embed=embed)
+
+              for component in ch.components:
+                for button in component:
+                  button.disabled = True
+              await ch.edit(components=ch.components)
+
               break
           elif (sender_saiyan < 1) or (opponent_saiyan < 1):
 
@@ -362,6 +404,12 @@ class Game(commands.Cog):
 
                   embed.set_footer(text="Note: The reason might not always be exactly accurate.")
                   await ctx.send(embed=embed)
+              
+              for component in ch.components:
+                for button in component:
+                  button.disabled = True
+              await ch.edit(components=ch.components)
+
               break
 
 
