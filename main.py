@@ -1,8 +1,8 @@
+import discord
+from discord.ext import commands
+from discord_components import Button, ButtonStyle
 from utils import *
 from keep_alive import keep_alive
-import discord
-from random import choice
-from discord.ext import commands
 import os
 
 client.remove_command("help")
@@ -95,6 +95,6 @@ async def reload(ctx, extension):
 async def ping(ctx):
     await ctx.send(f'Ping of main instance is `{round(client.latency * 1000)}ms` 🏓')
 
-keep_alive()
 
+keep_alive()
 client.run(bot_token)
