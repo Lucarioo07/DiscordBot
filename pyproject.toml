@@ -7,11 +7,12 @@ authors = ["Your Name <you@example.com>"]
 [tool.poetry.dependencies]
 python = "^3.8"
 tinydb = "^4.5.2"
-discord = "^1.7.3"
 Flask = "^2.0.2"
 buttons = "^0.1.9"
 replit = "^3.2.4"
 discord-components = "^2.1.2"
+"discord.py" = "^1.7.3"
+discord-slash-components-bridge = "^0.1.1"
 
 [tool.poetry.dev-dependencies]
 

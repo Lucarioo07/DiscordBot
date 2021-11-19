@@ -2,11 +2,13 @@ import discord
 import requests
 from discord.ext import commands
 from discord.ext.buttons import Paginator
+from discord_slash_components_bridge import SlashCommand
 import os
 
 bot_token = os.environ['bot_token']
 
-client = commands.Bot(command_prefix=">")
+client = commands.Bot(command_prefix=">")  
+slash = SlashCommand(client)
 
 safe = [622090741862236200, 888373479655751700]
 

@@ -1,7 +1,7 @@
 import discord
 from discord.ext import commands
 from replit import db
-from private import *
+from utils import *
 
 
 class Moderation(commands.Cog):
@@ -80,6 +80,9 @@ class Moderation(commands.Cog):
           for value in warns.values():
               warn_id = get_key(value, warns)
               reason = value["reason"]
+              channel = await client.fetch_channel(value['channel'])
+              msg = await channel.fetch_message(warn_id)
+              
               embed.add_field(
                 name=f"ID: `{warn_id}` \n",
                 
@@ -88,9 +91,9 @@ class Moderation(commands.Cog):
                       f"> **`{reason}`**"
               )
               if len(reason) <= 20:
-                description += f'> [**{reason}**](https://discord.com/channels/{ctx.guild.id}/{value["channel"]}/{warn_id} "Warn ID: {warn_id}") \n'
+                description += f'> [**{reason}**]({msg.jump_url} "Warn ID: {warn_id}") \n'
               else:
-                description += f'> [**{reason[0:20]}...**](https://discord.com/channels/{ctx.guild.id}/{value["channel"]}/{warn_id} "Warn ID: {warn_id}") \n'
+                description += f'> [**{reason[0:20]}...**]({msg.jump_url} "Warn ID: {warn_id}") \n'
           embed.description = description
           await ctx.send(embed=embed)
         

@@ -97,17 +97,6 @@ optional = false
 python-versions = ">=2.7, !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*, !=3.4.*"
 
 [[package]]
-name = "discord"
-version = "1.7.3"
-description = "A mirror package for discord.py. Please install that instead."
-category = "main"
-optional = false
-python-versions = "*"
-
-[package.dependencies]
-"discord.py" = ">=1.7.3"
-
-[[package]]
 name = "discord-components"
 version = "2.1.2"
 description = "An unofficial library for discord components."
@@ -123,6 +112,35 @@ aiohttp = "*"
 dev = ["black", "flake8", "isort", "sphinx", "sphinx-rtd-theme"]
 lint = ["black", "flake8", "isort", "sphinx", "sphinx-rtd-theme"]
 readthedocs = ["sphinx", "sphinx-rtd-theme"]
+
+[[package]]
+name = "discord-py-interactions"
+version = "3.0.2"
+description = "A simple API wrapper for Discord interactions."
+category = "main"
+optional = false
+python-versions = ">=3.6"
+
+[package.dependencies]
+aiohttp = "*"
+"discord.py" = "*"
+
+[package.extras]
+dev = ["black", "flake8", "isort", "sphinx", "sphinx-rtd-theme"]
+lint = ["black", "flake8", "isort", "sphinx", "sphinx-rtd-theme"]
+readthedocs = ["sphinx", "sphinx-rtd-theme"]
+
+[[package]]
+name = "discord-slash-components-bridge"
+version = "0.1.1"
+description = "Library for discord-components and discord-py-interactions(discord-slash)."
+category = "main"
+optional = false
+python-versions = ">=3.6"
+
+[package.dependencies]
+discord-components = "*"
+discord-py-interactions = "*"
 
 [[package]]
 name = "discord.py"
@@ -291,7 +309,7 @@ multidict = ">=4.0"
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.8"
-content-hash = "172a1e16c81a1e8b1aced24818d53cc3a333e65070d2eb59771b14585f08060d"
+content-hash = "ee391e3cbd99f634369e374f6bd14e6b55078e5ad318aee8a1cff7cb92278c7e"
 
 [metadata.files]
 aiohttp = [
@@ -365,13 +383,17 @@ colorama = [
     {file = "colorama-0.4.4-py2.py3-none-any.whl", hash = "sha256:9f47eda37229f68eee03b24b9748937c7dc3868f906e8ba69fbcbdd3bc5dc3e2"},
     {file = "colorama-0.4.4.tar.gz", hash = "sha256:5941b2b48a20143d2267e95b1c2a7603ce057ee39fd88e7329b0c292aa16869b"},
 ]
-discord = [
-    {file = "discord-1.7.3-py3-none-any.whl", hash = "sha256:248d728356e149c818a81b94659047a19305ea1623d4810bbb342f6b7df55f36"},
-    {file = "discord-1.7.3.tar.gz", hash = "sha256:846dd3d66888c2e0a8bd9120d8778a0fe088c003a7f6451668497f14e322a304"},
-]
 discord-components = [
     {file = "discord_components-2.1.2-py3-none-any.whl", hash = "sha256:872930fcce1ee1597acfe011fbc457171589423467830648d3b39ae78775b75a"},
     {file = "discord_components-2.1.2.tar.gz", hash = "sha256:c80980a29a198a6252fa0a71ae769dba61f11b0d184cbd62def54cc808ae9510"},
+]
+discord-py-interactions = [
+    {file = "discord-py-interactions-3.0.2.tar.gz", hash = "sha256:14f11c2333a2287991abfe5169cd7be5d25fdaadec546f0da6cbd3de00fc75bd"},
+    {file = "discord_py_interactions-3.0.2-py3-none-any.whl", hash = "sha256:b50eb92d2b86bda71b02077d95a3089205f6b981baea28304ee80916e0a22029"},
+]
+discord-slash-components-bridge = [
+    {file = "discord_slash_components_bridge-0.1.1-py3-none-any.whl", hash = "sha256:b59c04ad7985d0440e66a7ba72a21ee8753bde14a9e140ec60ff0feacf318105"},
+    {file = "discord_slash_components_bridge-0.1.1.tar.gz", hash = "sha256:314a1f3312ff629ef06bc043eeac31ede74a069eaea87466ddf7f275be33321e"},
 ]
 "discord.py" = [
     {file = "discord.py-1.7.3-py3-none-any.whl", hash = "sha256:c6f64db136de0e18e090f6752ea68bdd4ab0a61b82dfe7acecefa22d6477bb0c"},

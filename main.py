@@ -1,4 +1,4 @@
-from private import *
+from utils import *
 from keep_alive import keep_alive
 import discord
 from random import choice

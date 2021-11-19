@@ -1,15 +1,14 @@
 import discord
-from discord_components import *
 from discord.ext import commands
+from discord_components import *
 from game_info import *
-from private import *
+from utils import *
 
 
 class Game(commands.Cog):
   def __init__(self, client):
     self.client = client
-    
-  DiscordComponents(client)
+
 
   @commands.command(aliases=["dbzinfo", "info"])
   async def dbz_info(self, ctx):

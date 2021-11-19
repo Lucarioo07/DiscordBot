@@ -2,7 +2,7 @@
 import discord
 from discord.ext import commands
 # idk
-from private import *
+from utils import *
 import private
 import game_info
 import os
