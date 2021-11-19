@@ -3,7 +3,7 @@ import discord
 from discord.ext import commands
 # idk
 from utils import *
-import private
+import utils
 import game_info
 import os
 from replit import db
@@ -116,7 +116,7 @@ class Owner(commands.Cog):
             "author": ctx.author,
             "guild": ctx.guild,
             "message": ctx.message,
-            "private": private,
+            "private": utils,
             "game_info": game_info,
             "db":  db
         }
